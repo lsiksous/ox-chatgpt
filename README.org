@@ -1,15 +1,57 @@
 # -*- Mode: org -*-
 # -*- coding: utf-8 -*-
 
-#+TITLE: Org ChatGPT
+💈 ChatGPT Mode for org-babel
 
+This is a simple implementation of an org-babel mode for the ChatGPT API. It
+allows you to interpret chatgpt source blocks in org-mode documents.
+
+* Requirements
+
+You must first install dangirsh/openai-api.el package (See
+[[https://github.com/dangirsh/openai-api.el]]):
+
+#+begin_src emacs-lisp
+(use-package openai-api
+  :straight (openai-api :type git :host github :repo "dangirsh/openai-api.el")
+  :config
+  ;; required
+  (setq openai-api-secret-key <Token>) ; https://beta.openai.com/account/api-keys
+  ;; optional
+  (setq openai-api-engine "text-davinci-003") ; *-codex models require private beta access
+  (setq openai-api-completion-params '((max_tokens . 100)
+                                       (temperature . 0.0)
+                                       (frequency_penalty . 0)
+                                       (presence_penalty . 0)
+                                       (n . 1))))
+#+end_src
 
 * Installation
 
+Add the following lines to your init file :
+
 #+begin_src emacs-lisp
 (use-package ox-chatgpt
-  :straight (openai-api :type git :host github :repo "lsiksous/ox-chatgpt"))
+  :straight (ox-chatgpt :type git :host github :repo "lsiksous/ox-chatgpt"))
 #+end_src
 
 #+RESULTS:
 : ox-chatgpt
+
+* Usage
+
+Once installed, you can use the chatgpt mode in your org-mode documents like
+this:
+
+#+BEGIN_SRC markdown
+,#+BEGIN_SRC chatgpt
+What is the capital of France?
+,#+END_SRC
+#+END_SRC
+
+This code block will be interpreted by the ChatGPT API and the result will be
+inserted into your org-mode document.
+
+* License
+
+This project is licensed under the terms of the GPL 3.0 license.
