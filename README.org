@@ -1,0 +1,15 @@
+# -*- Mode: org -*-
+# -*- coding: utf-8 -*-
+
+#+TITLE: Org ChatGPT
+
+
+* Installation
+
+#+begin_src emacs-lisp
+(use-package ox-chatgpt
+  :straight (openai-api :type git :host github :repo "lsiksous/ox-chatgpt"))
+#+end_src
+
+#+RESULTS:
+: ox-chatgpt
